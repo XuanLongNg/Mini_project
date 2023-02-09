@@ -1,0 +1,71 @@
+html
+html
+    head
+        title CodeMely
+        meta(charset="utf-8")
+        style. 
+            #sign_up_tab {
+                margin:300px auto;
+                width: 300px;
+                height: 300px;
+            }
+            #message_lack_info {
+                display: none;
+            }
+            #message_acc_exists {
+                display: none;
+            }
+            #message_sign_up_success {
+                display: none;
+            }
+        if(message == "lack of information")
+            style. 
+                #message_lack_info {
+                    display: block;
+                }
+        if(message == "Account already exists")
+            style. 
+                #message_acc_exists {
+                    display: block;
+                }
+        if(message == "Success")
+            style. 
+                #message_sign_up_success {
+                    display: block;
+                }
+                #sign_up_tab {
+                    display: none;
+                }
+    body
+        div#sign_up_tab
+            form(action="/sign_up", method="POST")
+                label(for="username") Username:
+                input#username(type="text" name = "username" value = username)
+                br
+                label(for="password") Password:
+                input#password(type="password" name = "password" value = password)
+                br
+                label(for="name") Full Name:
+                input#name(type="text" name = "name" value = name)
+                br
+                label(for="dob") Date of Birth:
+                input#dob(type="date" name = "dob" value = dob)
+                br
+                label(for="address") Address:
+                input#address(type="text" name = "address" value = address)
+                br
+                label(for="phoneNum") Phone Number:
+                input#phoneNum(type="text" name = "phoneNum" value = phoneNum)
+                br
+                label(for="position") Your position:
+                    select(name = "position")
+                        option(value="Technical") Technical
+                        option(value="Security") Security
+                        option(value="Community") Community
+                br
+                button(type="submit") Submit
+                p#message_lack_info Please complete provided information
+                p#message_acc_exists Account already exists
+        p#message_sign_up_success Sign Up Success
+
+    
