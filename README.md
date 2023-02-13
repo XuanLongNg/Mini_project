@@ -1,2 +1,2 @@
 # Mini_project
-Just mini project about web
+Just mini project about web api
