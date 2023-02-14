@@ -1,5 +1,6 @@
 const POSITION = require("../constants/positions.contant");
 const { connectMysql } = require("../database");
+const PasswordEncrypt = require("../hashPassword/hashing");
 
 class UserService {
   async hasUser(username) {
@@ -38,11 +39,10 @@ class UserService {
     const data = await connectMysql.promise().execute(insertSql);
     return data;
   }
-
   async authentication({ username, password }) {
-    const mysql = `select username, password from account where username = '${username}' and password = '${password}'`;
-    const [data] = await connectMysql.promise().execute(mysql);
-    if (data.length == 1) {
+    const passwordDB = await PasswordEncrypt.getPassword(username);
+    const result = await PasswordEncrypt.comparePassword(password, passwordDB);
+    if (result) {
       return true;
     }
     return false;

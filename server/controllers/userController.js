@@ -1,3 +1,4 @@
+const PasswordEncrypt = require("../hashPassword/hashing");
 const userService = require("../services/userService");
 
 class UserController {
@@ -27,6 +28,9 @@ class UserController {
         return res.status(400).send({ message: "Username is exist" });
       }
       const personId = (await userService.getPersonId()) + 1;
+      const password = { ...req.body };
+      const passwordHash = await PasswordEncrypt.hashPassword(password);
+      req.body.password = passwordHash;
       const dataCreate = {
         ...req.body,
         personId,
@@ -38,6 +42,7 @@ class UserController {
       ]);
       return res.json({ message: "New Account has been created" });
     } catch (err) {
+      console.log(err);
       return res.send({ message: "server internal" });
     }
   }
