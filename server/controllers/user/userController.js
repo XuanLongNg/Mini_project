@@ -1,5 +1,5 @@
-const PasswordEncrypt = require("../hashPassword/hashing");
-const userService = require("../services/userService");
+const PasswordEncrypt = require("../../hashPassword/hashing");
+const userService = require("../../services/userService");
 
 class UserController {
   // Post

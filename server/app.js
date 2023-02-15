@@ -16,21 +16,13 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 // cookie parser
 var cookieParser = require("cookie-parser");
 app.use(cookieParser());
+
+// session
 var session = require("express-session");
-// bcrypt
-var bcrypt = require("bcrypt");
-const saltRounds = 10;
-const myPlaintextPassword = "s0//P4$$w0rD";
-const someOtherPlaintextPassword = "not_bacon";
 
-// User control
-const UserController = require("./controllers/userController");
-var user = UserController;
-
-// Database
-const DB = require("./database");
+// routers
 const { userRouter } = require("./routes/userRouter");
-
+const { adminRouter } = require("./routes/adminRouter");
 // pug
 app.set("view engine", "pug"); // pug to html
 app.set("views", "./server/views");
@@ -40,6 +32,7 @@ app.use(session({ secret: "Shh, its a secret!" }));
 app.use(express.static("./server/public"));
 
 app.use("/", userRouter);
+app.use("/admin", adminRouter);
 app.listen(3000, () => {
   console.log("http://localhost:3000");
 });
